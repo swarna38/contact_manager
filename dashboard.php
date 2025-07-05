@@ -3,6 +3,7 @@
    include 'config.php';
    include 'includes/header.php';
 
+    //use session from user_id get
    $user_id = $_SESSION['user_id'];
 
     //check if session user id not set

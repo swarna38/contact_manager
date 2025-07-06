@@ -22,6 +22,8 @@
 <h2>My Contacts</h2>
 <a href="add_contact.php" class="btn btn-success mb-3">+ Add Contact</a>
 <a href="logout.php" class="btn btn-danger float-end mb-3">Logout</a>
+<a href="search.php" class="btn btn-info mb-3">Search Contact</a>
+
 
 <table class="table table-bordered">
     <thead>

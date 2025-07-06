@@ -14,6 +14,7 @@
         $user = $sql->fetch();
 
         //check user exists and password check with hashpassword
+        //session user_id contacts table user_id
         if($user && password_verify($password, $user['password'])){
             $_SESSION['user_id'] = $user['id'];
             header("Location: dashboard.php");

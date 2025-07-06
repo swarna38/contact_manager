@@ -9,10 +9,10 @@ if(!isset($_SESSION['user_id'])){
 
 //get data form
 if($_SERVER['REQUEST_METHOD'] == 'POST'){
-    $name = $_POST['name'];
-    $email = $_POST['email'];
-    $phone = $_POST['phone'];
-    $notes = $_POST['notes'];
+    $name = trim($_POST['name']);
+    $email = trim($_POST['email']);
+    $phone = trim($_POST['phone']);
+    $notes = trim( $_POST['notes']);
     $user_id = $_SESSION['user_id'];
 
     $sql = $pdo->prepare("INSERT INTO contacts (user_id, name, email, phone, notes) VALUES (?, ?, ?, ?, ?)");

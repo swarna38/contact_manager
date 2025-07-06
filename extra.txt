@@ -1,20 +1,5 @@
 
-=======delete contact=====
-
-<?php
-include 'config.php';
-if (!isset($_SESSION['user_id'])) header("Location: login.php");
-
-$id = $_GET['id'];
-$stmt = $pdo->prepare("DELETE FROM contacts WHERE id = ? AND user_id = ?");
-$stmt->execute([$id, $_SESSION['user_id']]);
-
-header("Location: dashboard.php");
-exit;
-?>
-
-
-=======delete contact end=====
+ 
 
 
 =======edit contact ====

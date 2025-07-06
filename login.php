@@ -33,7 +33,7 @@
     <input class="form-control mb-2" name="username" placeholder="Enter Your Username" required>
     <input type="password" class="form-control mb-2" name="password" placeholder="Enter Your Password" required>
     <button class="btn btn-primary">Login</button>
-    <a href="register.php" class="btn btn-secondary">Register</a>
+    <a href="registration.php" class="btn btn-secondary">Register</a>
 </form>
 
 <?php if(isset($error)) echo "<p class='text-danger mt-2'>$error</p>"; ?>

@@ -15,9 +15,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && isset($_GET['query'])) {
     $query = '%' . trim($_GET['query']) . '%';
     $user_id = $_SESSION['user_id'];
 
-    $stmt = $pdo->prepare("SELECT * FROM contacts WHERE user_id = ? AND (name LIKE ? OR email LIKE ? OR phone LIKE ?)");
-    $stmt->execute([$user_id, $query, $query, $query]);
-    $results = $stmt->fetchAll();
+    //search kora 
+    $sql = $pdo->prepare("SELECT * FROM contacts WHERE user_id = ? AND (name LIKE ? OR email LIKE ? OR phone LIKE ?)");
+
+    $sql->execute([$user_id, $query, $query, $query]);
+    $results = $sql->fetchAll();
 }
 ?>
 
@@ -29,15 +31,20 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && isset($_GET['query'])) {
     <a href="dashboard.php" class="btn btn-secondary">Back</a>
 </form>
 
-<?php if ($results): ?>
+<!-- if data exists then show table otherwise not show  -->
+<?php if ($results){ ?>
     <table class="table table-bordered">
         <thead>
             <tr>
-                <th>Name</th><th>Email</th><th>Phone</th><th>Notes</th><th>Action</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Phone</th>
+                <th>Notes</th>
+                <th>Action</th>
             </tr>
         </thead>
         <tbody>
-            <?php foreach ($results as $contact): ?>
+            <?php foreach ($results as $contact){ ?>
                 <tr>
                     <td><?= htmlspecialchars($contact['name']) ?></td>
                     <td><?= htmlspecialchars($contact['email']) ?></td>
@@ -48,11 +55,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && isset($_GET['query'])) {
                         <a href="delete_contact.php?delete_id=<?= $contact['id'] ?>" onclick="return confirm('Delete this contact?')" class="btn btn-sm btn-danger">Delete</a>
                     </td>
                 </tr>
-            <?php endforeach; ?>
+            <?php } ?>
         </tbody>
     </table>
-<?php elseif (isset($_GET['query'])): ?>
-    <div class="alert alert-warning">No contacts found for: <strong><?= htmlspecialchars($_GET['query']) ?></strong></div>
-<?php endif; ?>
+<?php } elseif (isset($_GET['query'])){ ?>
+    <!-- if result not match then this block run  -->
+    <div class="alert alert-warning">No contacts found for: 
+        <strong><?php echo htmlspecialchars($_GET['query']) ?></strong>
+    </div>
+<?php } ?>
 
 <?php include 'includes/footer.php'; ?>
